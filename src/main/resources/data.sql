@@ -1,0 +1,5 @@
+INSERT INTO TB_EMPLOYEE (address, entry_date, name, role, salary, seniority_level) VALUES ('Rua Simone Lima Freire, 674', TIMESTAMP WITH TIME ZONE '2020-07-21T20:59:19Z', 'Caleb Gabriel Martins', 'Analista de Sistemas', 3000.00, 'Entry-level');
+INSERT INTO TB_EMPLOYEE (address, entry_date, name, role, salary, seniority_level) VALUES ('Rua Arlindo Oriani, 931', TIMESTAMP WITH TIME ZONE '2021-01-21T20:59:19Z', 'Oliver Cauê Baptista', 'Analista de Sistemas', 15000.00, 'Senior-level');
+INSERT INTO TB_EMPLOYEE (address, entry_date, name, role, salary, seniority_level) VALUES ('Rua José Duarte Maduro, 893', TIMESTAMP WITH TIME ZONE '2021-02-11T20:59:19Z', 'Eduardo Noah Barbosa', 'Analista de Sistemas', 8000.00, 'Mid-level');
+INSERT INTO TB_EMPLOYEE (address, entry_date, name, role, salary, seniority_level) VALUES ('Rua CJ-3, 147', TIMESTAMP WITH TIME ZONE '1987-08-11T20:59:19Z', 'Fernanda Clarice de Paula', 'CEO', 100000.00, 'CEO');
+INSERT INTO TB_EMPLOYEE (address, entry_date, name, role, salary, seniority_level) VALUES ('Rua André Ramos, 570', TIMESTAMP WITH TIME ZONE '1992-01-24T20:59:19Z', 'Laís Marli Rezende', 'CTO', 70000.00, 'CTO');

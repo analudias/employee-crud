@@ -1,7 +1,7 @@
 package com.purplepizza.employeecrud.entities;
 
 import java.io.Serializable;
-import java.security.Timestamp;
+import java.time.Instant;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -26,13 +26,13 @@ public class Employee implements Serializable {
 	private String role;
 	
 	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
-	private LocalDateTime entryDate;
+	private Instant entryDate;
 	
 	public Employee() {
 	}
 
 	public Employee(Long id, String name, String address, Double salary, String seniorityLevel, String role,
-			LocalDateTime entryDate) {
+			Instant entryDate) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -91,11 +91,11 @@ public class Employee implements Serializable {
 		this.role = role;
 	}
 
-	public LocalDateTime getEntryDate() {
+	public Instant getEntryDate() {
 		return entryDate;
 	}
 
-	public void setEntryDate(LocalDateTime entryDate) {
+	public void setEntryDate(Instant entryDate) {
 		this.entryDate = entryDate;
 	}
 
