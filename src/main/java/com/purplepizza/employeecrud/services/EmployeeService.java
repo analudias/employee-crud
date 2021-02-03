@@ -1,6 +1,8 @@
 package com.purplepizza.employeecrud.services;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +23,12 @@ public class EmployeeService {
 		Optional<Employee> obj = repository.findById(id);
 		Employee entity = obj.orElseThrow();
 		return new EmployeeDTO(entity);
+	}
+
+	@Transactional(readOnly = true)
+	public List<EmployeeDTO> findAll() {
+		List<Employee> list = repository.findAll();
+		return list.stream().map(x -> new EmployeeDTO(x)).collect(Collectors.toList());
 	}
 	
 }

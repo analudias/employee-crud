@@ -1,5 +1,7 @@
 package com.purplepizza.employeecrud.resources;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +23,12 @@ public class EmployeeResource {
 	public ResponseEntity<EmployeeDTO> findById(@PathVariable Long id) {
 		EmployeeDTO dto = service.findById(id);
 		return ResponseEntity.ok().body(dto);
+	}
+	
+	@GetMapping
+	public ResponseEntity<List<EmployeeDTO>> findAll() {
+		List<EmployeeDTO> list = service.findAll();
+		return ResponseEntity.ok().body(list);
 	}
 	
 }
