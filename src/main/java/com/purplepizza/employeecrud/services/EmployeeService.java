@@ -56,5 +56,10 @@ public class EmployeeService {
 		entity = repository.save(entity);
 		return new EmployeeDTO(entity);
 	}
+
+	@Transactional
+	public void delete(Long id) {
+		repository.deleteById(id);
+	}
 	
 }
