@@ -43,5 +43,18 @@ public class EmployeeService {
 		entity.setEntryDate(dto.getEntryDate());
 		return new EmployeeDTO(entity);
 	}
+
+	@Transactional
+	public EmployeeDTO insert(EmployeeDTO dto) {
+		Employee entity = new Employee();
+		entity.setName(dto.getName());
+		entity.setSalary(dto.getSalary());
+		entity.setAddress(dto.getAddress());
+		entity.setSeniorityLevel(dto.getSeniorityLevel());
+		entity.setRole(dto.getRole());
+		entity.setEntryDate(dto.getEntryDate());
+		entity = repository.save(entity);
+		return new EmployeeDTO(entity);
+	}
 	
 }
