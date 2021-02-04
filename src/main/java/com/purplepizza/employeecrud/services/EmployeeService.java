@@ -4,13 +4,17 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.purplepizza.employeecrud.dto.EmployeeDTO;
 import com.purplepizza.employeecrud.entities.Employee;
 import com.purplepizza.employeecrud.repositories.EmployeeRepository;
+import com.purplepizza.employeecrud.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class EmployeeService {
@@ -21,7 +25,7 @@ public class EmployeeService {
 	@Transactional(readOnly = true)
 	public EmployeeDTO findById(Long id) {
 		Optional<Employee> obj = repository.findById(id);
-		Employee entity = obj.orElseThrow();
+		Employee entity = obj.orElseThrow(() -> new ResourceNotFoundException("Id not found " + id));
 		return new EmployeeDTO(entity);
 	}
 
@@ -33,15 +37,20 @@ public class EmployeeService {
 
 	@Transactional
 	public EmployeeDTO update(Long id, EmployeeDTO dto) {
-		Employee entity = repository.getOne(id);
-		entity.setId(dto.getId());
-		entity.setName(dto.getName());
-		entity.setSalary(dto.getSalary());
-		entity.setAddress(dto.getAddress());
-		entity.setSeniorityLevel(dto.getSeniorityLevel());
-		entity.setRole(dto.getRole());
-		entity.setEntryDate(dto.getEntryDate());
-		return new EmployeeDTO(entity);
+		try {
+			Employee entity = repository.getOne(id);
+			entity.setId(dto.getId());
+			entity.setName(dto.getName());
+			entity.setSalary(dto.getSalary());
+			entity.setAddress(dto.getAddress());
+			entity.setSeniorityLevel(dto.getSeniorityLevel());
+			entity.setRole(dto.getRole());
+			entity.setEntryDate(dto.getEntryDate());
+			return new EmployeeDTO(entity);
+		} catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException("Id not found: " +id);
+		}
+		
 	}
 
 	@Transactional
@@ -57,9 +66,13 @@ public class EmployeeService {
 		return new EmployeeDTO(entity);
 	}
 
-	@Transactional
 	public void delete(Long id) {
-		repository.deleteById(id);
+		try {
+			repository.deleteById(id);
+		} catch (EmptyResultDataAccessException e) {
+			throw new ResourceNotFoundException("Id not found: " +id);
+		}
+		
 	}
 	
 }
