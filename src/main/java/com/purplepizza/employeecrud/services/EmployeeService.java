@@ -30,5 +30,18 @@ public class EmployeeService {
 		List<Employee> list = repository.findAll();
 		return list.stream().map(x -> new EmployeeDTO(x)).collect(Collectors.toList());
 	}
+
+	@Transactional
+	public EmployeeDTO update(Long id, EmployeeDTO dto) {
+		Employee entity = repository.getOne(id);
+		entity.setId(dto.getId());
+		entity.setName(dto.getName());
+		entity.setSalary(dto.getSalary());
+		entity.setAddress(dto.getAddress());
+		entity.setSeniorityLevel(dto.getSeniorityLevel());
+		entity.setRole(dto.getRole());
+		entity.setEntryDate(dto.getEntryDate());
+		return new EmployeeDTO(entity);
+	}
 	
 }
